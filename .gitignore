@@ -1,0 +1,16 @@
+node_modules/
+**/node_modules/
+
+**/.env
+!**/.env.example
+
+frontend/dist/
+backend/uploads/
+
+_patch_backup/
+_patch_backups/
+cemilin-patch-backups/
+renjana-patch-backups/
+
+.DS_Store
+*.log

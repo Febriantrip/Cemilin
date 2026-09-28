@@ -1,0 +1,11 @@
+const test=require('node:test');const assert=require('node:assert/strict');const {priceCart}=require('../src/pricing');
+const s={min_qty_tier1:5,discount_tier1:1000,min_qty_tier2:10,discount_tier2:2000,shipping_flat:12000};
+const item=(quantity,price=15000,unit='PCS')=>({quantity,price,unit});
+test('4 pcs tidak mendapat promo',()=>assert.deepEqual([priceCart([item(4)],s).discount,priceCart([item(4)],s).total],[0,60000]));
+test('5 pcs: potongan Rp1.000 SEKALI, total Rp74.000',()=>assert.deepEqual([priceCart([item(5)],s).discount,priceCart([item(5)],s).total],[1000,74000]));
+test('10 pcs: potongan Rp2.000 SEKALI, total Rp148.000',()=>assert.deepEqual([priceCart([item(10)],s).discount,priceCart([item(10)],s).total],[2000,148000]));
+test('pcs campuran mendapatkan 1 promo per keranjang',()=>{const q=priceCart([item(4),item(1,20000)],s);assert.equal(q.pcsCount,5);assert.equal(q.discount,1000);assert.equal(q.lines.reduce((n,l)=>n+l.lineDiscount,0),q.discount);assert.equal(q.lines.reduce((n,l)=>n+l.lineTotal,0),q.subtotal-q.discount);});
+test('kiloan tidak ikut ambang promo, tetapi tetap masuk subtotal',()=>{const q=priceCart([item(4),item(3,52000,'KG')],s);assert.deepEqual([q.pcsCount,q.discount,q.total],[4,0,216000]);});
+test('kiloan tidak menerima diskon bila kemasan memenuhi promo',()=>{const q=priceCart([item(5),item(1,52000,'KG')],s);assert.equal(q.discount,1000);assert.equal(q.lines[1].lineDiscount,0);assert.equal(q.total,126000);});
+test('kg pecahan dan ongkir',()=>assert.equal(priceCart([item(0.5,53000,'KG')],s,'DELIVERY').total,38500));
+test('potongan dibatasi harga kemasan agar tidak negatif',()=>{const q=priceCart([item(10,50)],s);assert.deepEqual([q.discount,q.total],[500,0]);});

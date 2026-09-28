@@ -1,0 +1,86 @@
+/* CemilIn V6: logo, accessible account settings, compact cart. All styling belongs to CSS. */
+.cemilin-wordmark{display:inline-flex;align-items:baseline;white-space:nowrap;font-family:'Plus Jakarta Sans',sans-serif;font-size:27px;font-weight:800;letter-spacing:-.07em;line-height:1.05;color:#204b3b}
+.cemilin-wordmark>strong{color:#e99251;font-weight:800;letter-spacing:-.055em}
+.brand-icon{transform:none;border-radius:15px}
+.brand-icon svg{display:block}
+.brand .cemilin-wordmark{font-size:27px}
+.brand small{letter-spacing:.14em;font-size:8px;margin-top:4px}
+.footer-inner .footer-brand .cemilin-wordmark{font-size:25px;color:#f4f8ed}
+.footer-inner .footer-brand .cemilin-wordmark>span,.footer-inner .footer-brand .cemilin-wordmark>strong{font-size:inherit;color:inherit}
+.footer-inner .footer-brand .cemilin-wordmark>strong{color:#ffc47d}
+.admin-side-brand .cemilin-wordmark{font-size:24px;color:#f4f8ed}
+.admin-side-brand .cemilin-wordmark>strong{color:#ffc47d}
+.admin-user-button{border:0;text-align:left;width:100%;cursor:pointer;font-family:inherit}
+.admin-user-button:hover{filter:brightness(1.12)}
+.admin-avatar-button{border:0;cursor:pointer;font:inherit}
+.settings-stack{display:grid;gap:15px;margin-top:17px}
+.settings-card-lite{margin:0;border:1px solid #e0e9dd;border-radius:14px;padding:16px;background:#fbfdf9}
+.settings-card-lite h3{font-size:16px;margin:0 0 4px;color:#254b37}
+.settings-card-lite .field-readonly{background:#f0f3ee;color:#7a8e81}
+.settings-card-lite .field-readonly input{color:#607567;background:transparent;cursor:not-allowed}
+.settings-card-lite .btn{margin-top:5px}
+/* Catalog badge disappears when qty controls expand; avoids double stacked promo pills. */
+.product-quantity-panel+.badge{display:none}
+/* Cart: header, products and footer use less vertical height. */
+.cart-drawer{width:min(510px,100vw)}
+.drawer-header{padding:20px 23px}
+.drawer-header h2{font-size:24px;margin-top:5px}
+.drawer-scroll{padding:8px 22px 10px;min-height:0;scrollbar-width:thin}
+.cart-line{display:grid;grid-template-columns:66px minmax(0,1fr);column-gap:12px;row-gap:9px;align-items:start;padding:15px 0}
+.cart-line:first-child{padding-top:10px}
+.cart-line>img{width:66px;height:70px;border-radius:10px}
+.cart-line-details>strong{font-size:14px;line-height:1.28}
+.cart-line-details>span{font-size:11px;margin:3px 0}
+.cart-line-details>b{font-size:12px}
+.cart-line-actions{grid-column:1/-1;display:flex;flex-wrap:nowrap;align-items:center;gap:7px;justify-content:space-between;margin:0;min-width:0}
+.cart-line-qty-note{display:flex;flex:0 1 auto;align-items:center;gap:6px;min-width:0;flex-wrap:nowrap}
+.qty-control{min-height:35px;border-radius:9px;flex-shrink:1;min-width:0}
+.qty-control button{width:32px;height:35px;flex:0 0 32px}
+.qty-control input{width:38px;font-size:13px;min-width:28px}
+.qty-control .qty-unit{font-size:10px;margin-right:4px}
+.cart-note-trigger{position:relative;min-width:35px;width:35px;height:35px;min-height:35px;flex:0 0 35px;padding:0;border-radius:9px}
+.cart-note-trigger.has-note:after{content:'';position:absolute;right:4px;top:4px;width:6px;height:6px;border-radius:100%;background:#e99350;box-shadow:0 0 0 1px white}
+.cart-line-end{margin-left:auto;display:flex;align-items:center;gap:7px;min-width:0;flex-shrink:0}
+.cart-remove{width:35px;height:35px;border-radius:9px}
+.cart-line-total{font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cart-line-note{grid-column:1/-1}
+.drawer-bottom{padding:13px 22px 17px;max-height:53vh;overflow-y:auto;flex-shrink:0}
+.drawer-bottom .promo-strip{padding:10px 12px;margin-bottom:11px}
+.drawer-bottom .promo-strip p{font-size:11px;line-height:1.42;margin:0}
+.drawer-bottom .cart-general-note{padding:10px 12px;margin-bottom:11px}
+.drawer-bottom .totals{margin-top:7px}
+.drawer-bottom .totals>div{margin-bottom:8px}
+.drawer-bottom .total-strong{margin-top:10px;padding-top:12px}
+.drawer-bottom .muted.tiny{margin:8px 0}
+.drawer-bottom .btn{margin-top:8px;min-height:45px}
+@media(max-width:580px){
+ .brand .cemilin-wordmark{font-size:22px}
+ .brand small{font-size:6.5px}
+ .drawer-header{padding:18px 16px}
+ .drawer-scroll{padding:7px 15px 8px}
+ .drawer-bottom{padding:12px 15px 14px;max-height:50vh}
+ .cart-line{grid-template-columns:60px minmax(0,1fr);column-gap:10px;padding:12px 0;row-gap:7px}
+ .cart-line>img{width:60px;height:64px}
+ .cart-line-actions{gap:5px;flex-wrap:nowrap}
+ .cart-line-qty-note{gap:5px}
+ .qty-control button{width:28px;flex-basis:28px;height:33px}
+ .qty-control input{width:30px;min-width:23px;font-size:12px}
+ .qty-control .qty-unit{font-size:9px;margin-right:3px}
+ .cart-note-trigger{min-width:32px;width:32px;height:33px;min-height:33px;flex-basis:32px;padding:0}
+ .cart-remove{width:32px;height:33px}
+ .cart-line-end{gap:5px}
+ .cart-line-total{font-size:11px}
+ .drawer-bottom .promo-strip p{font-size:10px}
+ .settings-card-lite{padding:12px}
+}
+@media(max-width:350px){
+ .drawer-scroll,.drawer-bottom{padding-left:10px;padding-right:10px}
+ .cart-line-actions{gap:3px}
+ .cart-line-qty-note{gap:3px}
+ .qty-control button{width:25px;flex-basis:25px}
+ .qty-control input{width:26px;min-width:22px}
+ .cart-note-trigger,.cart-remove{width:30px;min-width:30px}
+ .cart-note-trigger{flex-basis:30px}
+ .cart-line-total{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){.brand-icon{transition:none}}

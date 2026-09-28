@@ -1,0 +1,96 @@
+/* V30 - tiny surgical polish after V29.
+   Goal: keep V29 intact, only reduce the remaining oversized hero food image
+   and give the frame a softer torn / organic edge. */
+
+.hero-food-card{
+  position:absolute!important;
+  overflow:hidden!important;
+  border-radius:28px!important;
+  background:#f6eadb!important;
+  box-shadow:0 18px 34px rgba(10,39,25,.18), 0 0 0 8px rgba(255,248,238,.16)!important;
+  clip-path:polygon(3% 7%, 11% 2%, 22% 5%, 34% 1%, 47% 6%, 61% 2%, 75% 7%, 90% 3%, 98% 12%, 96% 26%, 99% 39%, 95% 52%, 98% 66%, 93% 81%, 96% 93%, 84% 98%, 70% 95%, 56% 99%, 41% 94%, 28% 98%, 16% 93%, 4% 97%, 1% 85%, 5% 71%, 2% 58%, 6% 43%, 1% 27%)!important;
+}
+.hero-food-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.10),transparent 30%,transparent 75%,rgba(255,255,255,.05));
+}
+.hero-food-card img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  display:block!important;
+}
+
+/* Desktop / tablet: slightly calmer proportions */
+.hero-card.hero-a.hero-food-card{
+  width:300px!important;
+  height:318px!important;
+  right:76px!important;
+  top:122px!important;
+  transform:rotate(4deg)!important;
+}
+.hero-card.hero-b.hero-food-card{
+  width:220px!important;
+  height:238px!important;
+  right:6px!important;
+  top:42px!important;
+  transform:rotate(13deg)!important;
+}
+
+@media(max-width:900px){
+  .hero-card.hero-a.hero-food-card{
+    width:230px!important;
+    height:245px!important;
+    right:10%!important;
+    top:40px!important;
+  }
+  .hero-card.hero-b.hero-food-card{
+    width:170px!important;
+    height:182px!important;
+    right:0!important;
+    top:20px!important;
+  }
+}
+
+@media(max-width:700px){
+  .hero-art{min-height:250px!important}
+  .orb-one{height:230px!important;width:230px!important;right:18%!important;top:14px!important}
+  .orb-two{height:110px!important;width:110px!important;right:-4px!important;top:10px!important}
+  .hero-card.hero-a.hero-food-card{
+    width:196px!important;
+    height:208px!important;
+    right:17%!important;
+    top:34px!important;
+    transform:rotate(3deg)!important;
+  }
+  .hero-card.hero-b.hero-food-card{
+    width:128px!important;
+    height:142px!important;
+    right:4px!important;
+    top:18px!important;
+    transform:rotate(11deg)!important;
+  }
+  .sticker-top{left:8%!important;top:22px!important}
+  .sticker-bottom{right:10%!important;bottom:16px!important}
+}
+
+@media(max-width:400px){
+  .hero-art{min-height:230px!important}
+  .hero-card.hero-a.hero-food-card{
+    width:184px!important;
+    height:195px!important;
+    right:13%!important;
+    top:34px!important;
+  }
+  .hero-card.hero-b.hero-food-card{
+    width:120px!important;
+    height:132px!important;
+    right:0!important;
+    top:22px!important;
+  }
+  .sticker-bottom strong{font-size:19px!important}
+}

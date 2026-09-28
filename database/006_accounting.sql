@@ -1,0 +1,6 @@
+-- Renjana Snacks V26 accounting foundation.
+-- Patch installer runs backend/scripts/migrate-accounting-v26.js automatically.
+-- This file is documentation for the added accounting domain.
+-- Master data: Chart of Accounts, Suppliers, Cash/Bank.
+-- Transactions: Purchases, Cash/Bank movements, automatic Sales journals.
+-- Reports: Purchase Journal, General Ledger, Profit & Loss, Balance Sheet, Cash Flow, Worksheet.

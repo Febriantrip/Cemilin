@@ -1,0 +1,70 @@
+/* V29 surgical UI correction.
+   Keep the pre-V28 layout; only fix metric-number centering and image presentation. */
+
+/* Seller Center: preserve the V25 cards exactly, only pin the number to the card center. */
+.admin-metrics.v23-metrics .metric-card{position:relative!important}
+.admin-metrics.v23-metrics .metric-value{
+  position:absolute!important;
+  left:50%!important;
+  top:42%!important;
+  transform:translate(-50%,-50%)!important;
+  width:max-content!important;
+  margin:0!important;
+  text-align:center!important;
+  justify-self:auto!important;
+  align-self:auto!important;
+  z-index:2!important;
+}
+.admin-metrics.v23-metrics .metric-title{
+  position:absolute!important;
+  left:8px!important;
+  right:8px!important;
+  bottom:19px!important;
+  width:auto!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+}
+
+/* The hero keeps the original composition/animation, but uses the AI catalog food crops. */
+.hero-food-card{
+  overflow:hidden;
+  border-radius:30px;
+  background:#f6eadb;
+  box-shadow:0 18px 34px rgba(10,39,25,.2);
+}
+.hero-food-card img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  display:block!important;
+}
+
+/* Keep catalog cards exactly as before. V29 assets themselves contain no embedded labels/text. */
+.family-visual img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+}
+.picker-product img{
+  object-fit:cover!important;
+  object-position:center!important;
+}
+
+/* Promo enabled: original content layout, without the old poster image. */
+.promo-area-no-poster{
+  grid-template-columns:minmax(240px,1fr) minmax(390px,1.35fr)!important;
+}
+
+@media(max-width:700px){
+  .admin-metrics.v23-metrics .metric-value{
+    top:41%!important;
+  }
+  .admin-metrics.v23-metrics .metric-title{
+    bottom:12px!important;
+  }
+  .promo-area-no-poster{
+    grid-template-columns:1fr!important;
+  }
+}

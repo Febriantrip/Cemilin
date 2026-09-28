@@ -1,0 +1,59 @@
+/* CemilIn V9: one catalog card per product family, modal-only variant selection. */
+.product-family-card .price-range{display:inline-block;font-size:clamp(14px,1.12vw,18px);line-height:1.25;letter-spacing:-.045em;white-space:nowrap}
+.product-family-card .product-info{min-width:0}
+.product-family-card .card-bottom{align-items:center}
+.family-promo{display:block;align-self:flex-start;max-width:100%;width:fit-content;padding:8px 11px;margin-top:13px;background:#e7f5ea;border-radius:14px;color:#286442;font-size:10px;font-weight:800;line-height:1.55}
+.product-picker-backdrop{position:fixed;inset:0;z-index:1100;background:rgba(12,35,25,.63);backdrop-filter:blur(5px);display:grid;place-items:center;padding:18px;animation:picker-backdrop-in .22s ease-out both}
+.product-picker{box-sizing:border-box;width:min(480px,100%);max-height:min(92dvh,800px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;background:#fffefa;border-radius:22px;box-shadow:0 28px 90px rgba(5,30,20,.33);padding:24px;animation:picker-dialog-in .30s cubic-bezier(.21,1.1,.31,1) both}
+.picker-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.picker-head .eyebrow{font-size:10px;color:#71947d;letter-spacing:.12em;font-weight:800}
+.picker-close{width:35px;height:35px;flex:none;border:0;background:#f0f5ef;color:#254b39;border-radius:11px;display:grid;place-items:center}
+.picker-product{display:flex;align-items:center;gap:15px;padding:12px 0 20px;border-bottom:1px solid #e5ebe3}
+.picker-product img{width:94px;height:94px;border-radius:15px;object-fit:contain;background:#fff0df;flex-shrink:0}
+.picker-product h2{font-size:23px;line-height:1.22;letter-spacing:-.04em;margin:0 0 5px;color:#214938}
+.picker-product span{display:block;font-size:12px;color:#819489;margin-bottom:7px}
+.picker-product strong{display:block;font-size:16px;color:#28513e}
+.picker-section{padding:18px 0;border-bottom:1px solid #e5ebe3}
+.picker-section>b,.picker-section>label{font-weight:800;color:#284f3a;font-size:13px;display:block;margin-bottom:12px}
+.picker-flavors{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.picker-flavor{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:7px;padding:12px;border:1px solid #e2eae0;border-radius:13px;background:#fff;text-align:left;color:#254c39;transition:background .16s,border-color .16s,transform .16s}
+.picker-flavor:hover:not(:disabled){transform:translateY(-2px);border-color:#b9d4bf;background:#f4faf2}
+.picker-flavor.selected{background:#ecf7eb;border-color:#2e7853;box-shadow:0 0 0 1px #2e7853 inset}
+.picker-flavor:disabled{opacity:.47;cursor:not-allowed}
+.picker-flavor>span{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:800}
+.picker-flavor>span svg:last-child{color:#24834b}
+.picker-flavor>strong{font-size:15px;font-weight:800}
+.picker-flavor>small{font-size:10px;color:#758779}
+.picker-qty{display:flex;align-items:center;overflow:hidden;border:1px solid #dbe8d9;border-radius:12px;min-height:49px;background:#fff}
+.picker-qty button{width:50px;min-height:49px;border:0;background:#edf6ec;color:#28543b;display:grid;place-items:center;flex:none}
+.picker-qty button:disabled{opacity:.35;cursor:not-allowed}
+.picker-qty input{min-width:0;width:100%;flex:1;border:0;background:transparent;outline:0;text-align:center;color:#204935;font:800 18px 'Plus Jakarta Sans',sans-serif}
+.picker-qty>span{font-weight:700;font-size:11px;color:#849787;margin-right:14px}
+.picker-error{color:#c14a3e;font-size:12px;margin:9px 0 0}
+.picker-footer{padding-top:18px;display:grid;gap:14px}.picker-footer>div{display:flex;align-items:center;justify-content:space-between;gap:10px}.picker-footer>div span{color:#819287;font-size:12px}.picker-footer>div strong{font-size:23px;letter-spacing:-.04em;color:#234c38}
+.picker-submit{min-height:48px;display:flex;justify-content:center;align-items:center;gap:8px;width:100%;border:0;border-radius:12px;background:#204c3b;color:#fff;font-weight:800;font-size:13px}
+.picker-submit:hover:not(:disabled){background:#327254}.picker-submit:disabled{opacity:.53;cursor:wait}
+@keyframes picker-backdrop-in{from{opacity:0}to{opacity:1}}
+@keyframes picker-dialog-in{from{opacity:0;transform:translateY(22px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:580px){.product-picker-backdrop{align-items:end;padding:0}.product-picker{width:100%;max-height:90dvh;border-radius:22px 22px 0 0;padding:18px 18px max(20px,env(safe-area-inset-bottom))}.picker-product img{width:76px;height:76px}.picker-product h2{font-size:20px}.picker-flavor{padding:10px}.picker-flavor>strong{font-size:13px}.family-promo{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.product-picker-backdrop,.product-picker{animation:none}.picker-flavor{transition:none}}
+
+.product-family-card .card-bottom>div{min-width:0}.product-family-card .card-bottom small{white-space:normal}.product-family-card .family-promo{line-height:1.5}
+@media(max-width:580px){.product-family-card .price-range{font-size:16px}}
+
+/* V16: both price range and + on the SAME row; keep the button in its own grid track. */
+@media(max-width:580px){
+ .product-family-card .product-info{padding-left:10px;padding-right:10px}
+ .product-family-card .card-bottom{display:grid;grid-template-columns:minmax(0,1fr) 30px;align-items:center;column-gap:4px;row-gap:0}
+ .product-family-card .card-bottom>div{width:auto;min-width:0;padding:0}
+ .product-family-card .price-range{display:block;width:auto;max-width:100%;font-size:clamp(10.5px,2.9vw,12.5px);line-height:1.25;letter-spacing:-.04em;white-space:nowrap}
+ .product-family-card .card-bottom small{display:block;font-size:9px;line-height:1.35;white-space:normal}
+ .product-family-card .add-btn{position:static!important;grid-column:2;grid-row:1;justify-self:end;align-self:center;width:30px;height:34px;min-width:30px;padding:0;margin:0;border-radius:10px;transform:none!important}
+ .product-family-card .add-btn svg{width:18px;height:18px}
+ .product-family-card .family-promo{box-sizing:border-box;width:100%;max-width:none;padding:10px 12px;margin-top:10px;line-height:1.5;border-radius:13px}
+}
+@media(max-width:390px){
+ .product-family-card .product-info{padding-left:9px;padding-right:9px}
+ .product-family-card .price-range{font-size:10.2px;letter-spacing:-.055em}
+ .product-family-card .add-btn{width:28px;min-width:28px;height:32px}
+ .product-family-card .card-bottom{grid-template-columns:minmax(0,1fr) 28px;column-gap:3px}
+}

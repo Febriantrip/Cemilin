@@ -1,0 +1,30 @@
+/* Renjana cart & catalog qty UX V5. No JS-injected style. */
+.product-quantity-panel{margin-top:13px;padding:12px;border:1px solid #e0ebdf;border-radius:13px;background:#f7faf5;display:grid;gap:11px}
+.product-quantity-label{color:#40684b;font-size:11px;font-weight:800}
+.product-stepper{display:flex;align-items:center;min-height:42px;border:1px solid #dce6dc;border-radius:10px;overflow:hidden;background:white}
+.product-stepper button{border:0;background:#eef5ec;color:#25503a;width:39px;height:42px;flex-shrink:0;display:grid;place-items:center}
+.product-stepper button:disabled{opacity:.3;cursor:not-allowed}
+.product-stepper input{border:0;outline:0;background:white;min-width:0;width:100%;font-family:inherit;font-weight:800;font-size:15px;text-align:center;color:#204b3b;padding:5px}
+.product-stepper>span{font-size:11px;font-weight:750;color:#6d8072;margin-right:8px}
+.product-add-confirm{width:100%;min-height:39px;background:#204b3b;border:0;border-radius:10px;color:white;font-family:inherit;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;gap:8px}
+.product-add-confirm:disabled{opacity:.5;cursor:wait}
+.product-qty-error{color:#bd3f34;line-height:1.5}
+.cart-line-qty-note{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0}
+.cart-note-trigger{display:flex;gap:5px;align-items:center;justify-content:center;min-height:40px;border:1px solid #dce6dc;border-radius:10px;padding:0 10px;background:#f7faf5;color:#315a45;font-size:11px;font-weight:800}
+.cart-note-trigger:hover,.cart-note-trigger.has-note{background:#e6f3e8;border-color:#bcdcc2}
+.cart-line-note{grid-column:1/-1;display:flex;flex-direction:column;gap:8px;font-size:12px;font-weight:800;color:#315b45}
+.cart-line-note label small{font-weight:400;color:#899a8d}
+.cart-note-footer{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.cart-note-footer>small{color:#8b9b8e;font-size:10px;font-weight:400}
+.cart-note-footer button{display:flex;align-items:center;gap:5px;border:1px solid #b9d7c1;border-radius:9px;padding:8px 11px;background:#e9f5eb;color:#275740;font-size:11px;font-weight:800}
+.cart-note-footer button:disabled{opacity:.45;cursor:not-allowed}
+.cart-note-preview{grid-column:1/-1;white-space:pre-wrap;overflow-wrap:anywhere;color:#476b50;background:#f2f8f2;border-radius:9px;padding:10px 12px;font-size:11px;margin:0}
+.cart-general-note{border:1px solid #dce9dc;border-radius:12px;padding:12px;margin-bottom:14px;background:#fbfdfa}
+.cart-general-trigger{display:flex;align-items:center;gap:8px;width:100%;border:0;background:none;text-align:left;color:#315a45;font-size:12px;font-weight:800;padding:0}
+.cart-general-trigger small{font-size:10px;color:#899a8d;font-weight:500}
+.cart-note-chevron{margin-left:auto;font-size:17px}
+.cart-general-note-editor{display:grid;gap:8px;margin-top:11px}
+.cart-general-note-editor textarea{box-sizing:border-box;width:100%;border:1px solid #dce6dc;border-radius:10px;min-height:67px;resize:vertical;font-family:inherit;font-weight:500;font-size:12px;color:#294a3a;background:white;padding:11px}
+.cart-general-note>.cart-note-preview{margin-top:9px}
+.drawer-bottom{max-height:min(60vh,525px);overflow-y:auto;flex-shrink:0}
+@media(max-width:580px){.cart-line-actions{align-items:flex-start}.cart-line-qty-note{gap:6px}.cart-note-trigger{min-height:36px;padding:0 7px}.cart-note-trigger span{font-size:10px}.product-quantity-panel{padding:9px}.product-add-confirm{font-size:11px}.drawer-bottom{max-height:54vh}}

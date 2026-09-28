@@ -1,0 +1,14 @@
+export type Unit='PCS'|'KG';
+export type Category='Basreng'|'Makaroni'|'Usus'|'Kripca';
+export type OrderStatus='AWAITING_PAYMENT'|'PAYMENT_REVIEW'|'PAYMENT_REJECTED'|'PAID'|'PROCESSING'|'READY'|'SHIPPED'|'COMPLETED'|'CANCELLED'|'EXPIRED';
+export type User={id:number;name:string;username:string;email:string|null;phone:string;role:'ADMIN'|'CUSTOMER'};
+export type Product={id:number;sku:string;name:string;variant:string;category:Category;unit:Unit;size_label:string;description:string;price:number;stock:number;active:number;sort_order?:number;image_url:string|null;image_filename?:string|null};
+export type CartItem=Product&{product_id:number;quantity:number;note:string};
+export type PricingLine=CartItem&{lineSubtotal:number;unitDiscount:number;lineDiscount:number;lineTotal:number};
+export type Pricing={lines:PricingLine[];pcsCount:number;tier:number;tierDiscount:number;subtotal:number;discount:number;shipping:number;total:number};
+export type Cart={items:CartItem[];pricing:Pricing;note:string};
+export type Store={store_name:string;store_address:string;headline:string;whatsapp:string;promo_enabled:boolean;min_qty_tier1:number;discount_tier1:number;min_qty_tier2:number;discount_tier2:number;shipping_flat:number;payment_expiry_hours:number;bank_ready:boolean;qris_ready:boolean};
+export type OrderItem={id:number;product_id:number;sku:string;name:string;variant:string;unit:Unit;size_label:string;quantity:number;unit_price:number;unit_discount:number;line_total:number;note:string};
+export type Order={id:number;order_no:string;user_id:number;recipient_name:string;recipient_phone:string;fulfillment:'PICKUP'|'DELIVERY';address:string|null;note:string;payment_method:'QRIS'|'BCA';status:OrderStatus;subtotal:number;discount:number;shipping:number;total:number;proof_filename:string|null;payment_note:string|null;expires_at:string;paid_at:string|null;created_at:string;items:OrderItem[];customer_email?:string|null;customer_username?:string};
+export type PaymentDetails={bank_name:string;bank_account:string;bank_holder:string;qris_url:string|null;whatsapp:string};
+export type StoreSettings=Omit<Store,'bank_ready'|'qris_ready'|'promo_enabled'>&{promo_enabled:0|1;id:number;bank_name:string;bank_account:string;bank_holder:string;qris_url:string|null;qris_filename:string|null};

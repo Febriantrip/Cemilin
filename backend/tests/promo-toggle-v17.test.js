@@ -1,0 +1,10 @@
+const test=require('node:test');
+const assert=require('node:assert/strict');
+const {priceCart}=require('../src/pricing');
+const settings={promo_enabled:1,min_qty_tier1:5,discount_tier1:3000,min_qty_tier2:10,discount_tier2:5000,shipping_flat:12000};
+const items=[{unit:'PCS',price:16000,quantity:5,product_id:1},{unit:'KG',price:65000,quantity:1,product_id:2}];
+test('promo on calculates total cart discount once at configured tiers',()=>{const q=priceCart(items,settings);assert.equal(q.discount,3000);assert.equal(q.total,142000);assert.equal(q.tier,1);assert.equal(q.lines[1].lineDiscount,0);});
+test('promo off removes any automatic discounts even if tier reached',()=>{const q=priceCart(items,{...settings,promo_enabled:0});assert.equal(q.discount,0);assert.equal(q.total,145000);assert.equal(q.tier,0);assert.equal(q.tierDiscount,0);assert.equal(q.pcsCount,5);});
+test('10 pcs switches tier to higher discount only when promo enabled',()=>{const pack=[{unit:'PCS',price:16000,quantity:10}];assert.equal(priceCart(pack,settings).discount,5000);assert.equal(priceCart(pack,{...settings,promo_enabled:0}).discount,0);});
+test('old pricing test settings without flag default to promo enabled',()=>{const {promo_enabled,...legacy}=settings;assert.equal(priceCart(items,legacy).discount,3000);});
+test('promo off still computes delivery charge but does not discount',()=>{const q=priceCart(items,{...settings,promo_enabled:0},'DELIVERY');assert.equal(q.total,157000);assert.equal(q.shipping,12000);});

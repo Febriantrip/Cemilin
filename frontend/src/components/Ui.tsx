@@ -1,0 +1,7 @@
+import {AlertCircle,CheckCircle2,X} from 'lucide-react';
+import type {ReactNode} from 'react';
+export function Modal({children,onClose,title,wide=false}:{children:ReactNode;onClose:()=>void;title?:string;wide?:boolean}){return <div className="modal-backdrop" onMouseDown={e=>{if(e.target===e.currentTarget)onClose();}}><section className={'modal '+(wide?'modal-wide':'')} role="dialog" aria-modal="true" aria-label={title||'Dialog'}><button className="icon-btn modal-close" onClick={onClose} aria-label="Tutup"><X size={20}/></button>{title&&<h2>{title}</h2>}{children}</section></div>;}
+export function Toast({message,onClose,error=false}:{message:string;onClose:()=>void;error?:boolean}){return <div className={'toast '+(error?'toast-error':'')} role="status">{error?<AlertCircle size={20}/>:<CheckCircle2 size={20}/>}<span>{message}</span><button className="icon-btn" onClick={onClose} aria-label="Tutup"><X size={17}/></button></div>;}
+export function Empty({icon,headline,detail,action}:{icon:ReactNode;headline:string;detail:string;action?:ReactNode}){return <div className="empty-state"><div className="empty-symbol">{icon}</div><h3>{headline}</h3><p>{detail}</p>{action}</div>;}
+export function Badge({children,kind='neutral'}:{children:ReactNode;kind?:string}){return <span className={'badge badge-'+kind}>{children}</span>;}
+export function Spinner(){return <span className="spinner" aria-label="Memuat"/>;}

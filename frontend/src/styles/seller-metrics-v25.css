@@ -1,0 +1,162 @@
+/* Renjana Snacks V25 - Seller Center metric alignment
+   Surgical override:
+   - icon stays in top-left
+   - value + label are centered
+   - label is always one line
+*/
+.admin-metrics.v23-metrics{
+  grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  gap:12px!important;
+  margin:18px 0 22px!important;
+}
+
+.admin-metrics.v23-metrics .metric-card{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  grid-template-rows:auto auto!important;
+  row-gap:6px!important;
+  align-content:center!important;
+  justify-items:center!important;
+  min-width:0!important;
+  min-height:120px!important;
+  padding:24px 14px 16px!important;
+  overflow:hidden!important;
+  border:1px solid rgba(37,86,59,.10)!important;
+  border-radius:18px!important;
+  background:rgba(255,255,255,.88)!important;
+  color:#244836!important;
+  text-align:center!important;
+  box-shadow:0 10px 26px rgba(21,67,44,.065)!important;
+  backdrop-filter:blur(12px)!important;
+  -webkit-backdrop-filter:blur(12px)!important;
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease!important;
+}
+
+.admin-metrics.v23-metrics .metric-card::after{
+  width:88px!important;
+  height:88px!important;
+  right:-34px!important;
+  top:-38px!important;
+  opacity:.04!important;
+}
+
+.admin-metrics.v23-metrics .metric-card:hover{
+  transform:translateY(-3px)!important;
+  border-color:rgba(56,116,78,.18)!important;
+  box-shadow:0 16px 34px rgba(21,67,44,.10)!important;
+}
+
+.admin-metrics.v23-metrics .metric-icon{
+  position:absolute!important;
+  top:13px!important;
+  left:14px!important;
+  width:42px!important;
+  height:42px!important;
+  margin:0!important;
+  border-radius:13px!important;
+  display:grid!important;
+  place-items:center!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.78)!important;
+}
+
+.admin-metrics.v23-metrics .metric-icon svg{
+  width:19px!important;
+  height:19px!important;
+}
+
+.admin-metrics.v23-metrics .metric-value{
+  position:static!important;
+  grid-column:1!important;
+  grid-row:1!important;
+  align-self:end!important;
+  justify-self:center!important;
+  display:block!important;
+  width:auto!important;
+  min-width:0!important;
+  height:auto!important;
+  padding:0!important;
+  margin:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:#2b583f!important;
+  font:850 32px/.95 'Plus Jakarta Sans','DM Sans',sans-serif!important;
+  letter-spacing:-.055em!important;
+  font-variant-numeric:tabular-nums!important;
+  white-space:nowrap!important;
+  text-align:center!important;
+}
+
+.admin-metrics.v23-metrics .metric-title{
+  position:static!important;
+  grid-column:1!important;
+  grid-row:2!important;
+  align-self:start!important;
+  justify-self:center!important;
+  display:block!important;
+  width:auto!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  color:#728579!important;
+  font-size:10.5px!important;
+  line-height:1.15!important;
+  font-weight:800!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  overflow-wrap:normal!important;
+}
+
+.admin-metrics.v23-metrics .metric-blue .metric-value{color:#4e7594!important}
+.admin-metrics.v23-metrics .metric-cyan .metric-value{color:#39777d!important}
+.admin-metrics.v23-metrics .metric-lavender .metric-value{color:#755e9e!important}
+.admin-metrics.v23-metrics .metric-peach .metric-value{color:#b96f36!important}
+.admin-metrics.v23-metrics .metric-mint .metric-value{color:#4f7b56!important}
+
+@media(max-width:1250px){
+  .admin-metrics.v23-metrics{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+
+@media(max-width:700px){
+  .admin-metrics.v23-metrics{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+    margin:14px 0 18px!important;
+  }
+  .admin-metrics.v23-metrics .metric-card{
+    min-height:104px!important;
+    padding:22px 8px 13px!important;
+    row-gap:5px!important;
+    border-radius:15px!important;
+  }
+  .admin-metrics.v23-metrics .metric-icon{
+    top:10px!important;
+    left:10px!important;
+    width:36px!important;
+    height:36px!important;
+    border-radius:11px!important;
+  }
+  .admin-metrics.v23-metrics .metric-icon svg{width:17px!important;height:17px!important}
+  .admin-metrics.v23-metrics .metric-value{font-size:28px!important}
+  .admin-metrics.v23-metrics .metric-title{font-size:9.5px!important;line-height:1.1!important}
+}
+
+@media(max-width:400px){
+  .admin-metrics.v23-metrics .metric-card{
+    min-height:98px!important;
+    padding:20px 5px 11px!important;
+  }
+  .admin-metrics.v23-metrics .metric-icon{
+    top:9px!important;
+    left:9px!important;
+    width:32px!important;
+    height:32px!important;
+    border-radius:10px!important;
+  }
+  .admin-metrics.v23-metrics .metric-icon svg{width:16px!important;height:16px!important}
+  .admin-metrics.v23-metrics .metric-value{font-size:25px!important}
+  .admin-metrics.v23-metrics .metric-title{font-size:8.8px!important}
+}
