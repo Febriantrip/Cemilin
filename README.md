@@ -1,81 +1,286 @@
-# Renjana Snacks — Toko Online React + MySQL
+# CemilIn
 
-Aplikasi toko camilan dengan **halaman login pelanggan, katalog terlindungi, keranjang, checkout, pembayaran QRIS / transfer BCA manual, dashboard admin, stok, dan promo bertingkat**. Nama toko dan materi ilustrasi awal dapat diganti lewat panel admin. Desain responsif untuk desktop dan HP.
+<p align="center">
+  <strong>Full-stack snack e-commerce platform with customer storefront, Seller Center, stock reservation, manual payment verification, accounting, and Railway deployment.</strong>
+</p>
 
-## Struktur
+<p align="center">
+  <img src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=111" alt="React 18">
+  <img src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=fff" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Node.js-Express-339933?logo=nodedotjs&logoColor=fff" alt="Node.js + Express">
+  <img src="https://img.shields.io/badge/MySQL-Database-4479A1?logo=mysql&logoColor=fff" alt="MySQL">
+  <img src="https://img.shields.io/badge/Railway-Deployment-0B0D0E?logo=railway&logoColor=fff" alt="Railway">
+</p>
 
-```text
-renjana-snacks/
-├── frontend/                 React 18 + Vite + TypeScript
-│   ├── src/admin/            dashboard, pesanan, produk, pengaturan
-│   ├── src/pages/            login-gate, katalog, checkout, pesanan
-│   ├── src/components/       kartu produk, modal akun, keranjang
-│   ├── src/styles/           CSS terpisah sesuai fungsi
-│   └── public/illustrations/ ilustrasi default (ganti dengan foto asli via admin)
-├── backend/                  Node.js + Express REST API + mysql2
-│   ├── src/routes/           rute per domain
-│   ├── src/services/         logika harga, status, kedaluwarsa
-│   ├── scripts/create-admin.js
-│   ├── tests/                pengujian harga dan status
-│   └── uploads/              dibuat otomatis, tidak masuk ZIP/Git
-├── database/001_schema.sql   tabel MySQL
-├── database/002_seed_products.sql 16 varian contoh
-├── Setup-Windows.ps1
-└── Start-Windows.ps1
-```
+## Overview
 
-## Cara menjalankan di Windows + XAMPP
+**CemilIn** is a full-stack e-commerce system built for a snack business. It combines a responsive customer storefront with an operational **Seller Center** for product, stock, order, payment, store-setting, and accounting workflows.
 
-**Prasyarat:** Node.js 20+ / 22+, npm, XAMPP MySQL versi MySQL 8.0.16+ atau MariaDB yang mendukung fitur schema; koneksi internet untuk `npm install` pertama kali.
+The application is designed around real transaction flow rather than catalog-only browsing. Stock is reserved during checkout, manual payment evidence moves through review, order-status transitions are validated, cancelled or expired unpaid orders can restore stock, and paid sales can feed the accounting layer.
 
-1. Ekstrak ZIP utuh, misalnya ke `C:\xampp\htdocs\renjana-snacks`.
-2. Di PowerShell pada folder proyek jalankan `powershell -ExecutionPolicy Bypass -File .\Setup-Windows.ps1`. Ini memasang dependency dan membuat `backend/.env` dengan secret login acak. Alternatif manual: copy `backend/.env.example` ke `backend/.env` lalu `npm run install:all`.
-3. Jalankan **MySQL** di XAMPP. Buka **http://localhost/phpmyadmin** → Import → pilih `database/001_schema.sql`, lanjut import `database/002_seed_products.sql`. File pertama membuat database `renjana_snacks`. Import kedua boleh diulang tanpa duplikasi SKU.
-4. Edit `backend/.env`: isi `DB_USER`, `DB_PASSWORD`, dan jika perlu `DB_PORT`. Default untuk XAMPP lokal sering `root` dengan password kosong, tetapi gunakan kredensial MySQL milikmu yang sebenarnya. Isi `ADMIN_EMAIL`, `ADMIN_PASSWORD` (**min. 12 karakter**) dan `ADMIN_NAME`.
-5. Buat akun penjual sekali saja: `npm run admin --prefix backend`. Perintah ini **hanya boleh dijalankan oleh pemilik sistem**, bukan pelanggan. Setelah berhasil, hapus isi `ADMIN_PASSWORD` dari `.env` dan simpan kredensial di password manager.
-6. Jalankan `powershell -ExecutionPolicy Bypass -File .\Start-Windows.ps1` atau `npm run dev` di root.
-7. Buka URL **Website** yang ditampilkan di terminal setelah launcher memilih port kosong (biasanya **http://localhost:5173**, tetapi bisa berbeda). Login admin dengan akun langkah 5. Masuk **Seller Center → Pengaturan** dan masukkan nomor rekening BCA, nama pemilik rekening, alamat pengambilan, WhatsApp, ongkir, lalu **upload QRIS statis resmi dari penyedia pembayaran**. Tanpa konfigurasi tersebut, pelanggan tidak dapat memilih metode bayar terkait.
-8. Ubah stok contoh ke stok nyata dan upload foto produk asli lewat Seller Center → Produk. Stok seed `100 pcs` dan `30 kg` hanyalah data demonstrasi.
+## Product areas
 
-> Untuk reset admin, edit ulang `ADMIN_EMAIL` / `ADMIN_PASSWORD` lalu jalankan perintah admin lagi. **Jangan** jalankan di server yang bisa diakses publik oleh orang lain. Tindakan ini bisa memberi role admin ke email yang telah terdaftar.
+| Area | Responsibility |
+| --- | --- |
+| **Storefront** | Product browsing, account access, cart, checkout, and customer orders |
+| **Seller Center** | Dashboard, product maintenance, stock, order handling, and store settings |
+| **Cart & Pricing** | Quantity validation, variant switching, notes, promotional pricing, shipping |
+| **Order Workflow** | Checkout, payment review, preparation, fulfillment, completion, cancellation |
+| **Payments** | Static QRIS / bank transfer with manual seller verification |
+| **Inventory** | Checkout-time stock reservation and controlled stock restoration |
+| **Purchasing** | Supplier purchases and purchase-cost allocation |
+| **Accounting** | Accounts, journals, cash/bank, purchases, ledger, financial statements |
+| **Deployment** | Single-origin React + Express deployment on Railway with MySQL |
 
-## Daftar harga bawaan
+## Core capabilities
 
-| Produk | Ukuran/rasa | Harga |
-|---|---|---:|
-| Basreng, Makaroni | 150 gr: Original, Pedas, Extra Pedas | Rp15.000 / pcs |
-| Usus Crispy | 200 gr: Pedas | Rp20.000 / pcs |
-| Kripca | 150 gr: Original | Rp10.000 / pcs |
-| Basreng, Makaroni | Kiloan: Original | Rp51.000 / kg |
-| Basreng, Makaroni | Kiloan: Pedas | Rp52.000 / kg |
-| Basreng, Makaroni | Kiloan: Extra Pedas | Rp53.000 / kg |
-| Usus Crispy | Kiloan: Pedas | Rp105.000 / kg |
-| Kripca | Kiloan: Original | Rp65.000 / kg |
+- Customer registration and authenticated shopping
+- Product catalog with PCS and KG units
+- Cart-level notes and product notes
+- Product-variant switching with stock validation
+- Checkout with pickup or delivery
+- Static QRIS and bank-transfer workflows
+- Payment-proof upload and seller verification
+- Order lifecycle controls
+- Automatic expiration of unpaid orders
+- Stock reservation and restoration
+- Seller dashboard and order analytics
+- Product and image management
+- Configurable store profile, shipping, promo, bank, and QRIS settings
+- Purchase recording with supplier and cash/bank references
+- Purchase-costing allocation
+- Chart of accounts and cash/bank masters
+- Purchase journal
+- General ledger
+- Profit & loss
+- Balance sheet
+- Cash-flow report
+- Worksheet
+- Railway production preparation and health check
 
-**Diskon:** total seluruh item kemasan (bisa campur jenis) minimal 5 pcs = Rp1.000 **per pcs**, minimal 10 pcs = Rp2.000 **per pcs**; tingkat tertinggi saja yang berlaku, tidak bertumpuk. Produk KG tidak menambah hitungan pcs, tidak menerima diskon ini. Harga dan batas diskon dapat diedit di admin. KG bisa dibeli minimal 0,25 kg dengan kontrol jumlah per 0,25 kg.
+## Order lifecycle
 
-## Alur pembayaran dan stok
+~~~text
+Checkout
+   ↓
+AWAITING_PAYMENT
+   ↓
+PAYMENT_REVIEW
+   ↓
+PAID
+   ↓
+PROCESSING
+   ↓
+READY / SHIPPED
+   ↓
+COMPLETED
+~~~
 
-`Checkout → AWAITING_PAYMENT → upload bukti → PAYMENT_REVIEW → admin konfirmasi PAID → PROCESSING → READY → COMPLETED`.
+Unpaid orders can also become `PAYMENT_REJECTED`, `CANCELLED`, or `EXPIRED` according to the supported transition rules.
 
-- Sebelum `PAID`, **tidak ada tombol untuk memulai persiapan barang**. Admin harus memeriksa uang masuk langsung di mutasi BCA / dashboard QRIS resminya, bukan hanya percaya screenshot.
-- Saat checkout, stok langsung **direservasi**. Jika belum ada bukti dan waktu pembayaran habis (default 24 jam), pesanan menjadi `EXPIRED` dan stok dikembalikan. Job pengecekan berjalan berkala dan saat halaman pesanan dibuka. Pesanan yang sedang diverifikasi tidak kedaluwarsa otomatis.
-- Admin boleh menolak bukti dengan alasan, pelanggan lalu upload ulang dalam 24 jam. Pembatalan pesanan yang belum lunas mengembalikan stok. Pembatalan **setelah lunas** sengaja diblokir karena butuh prosedur refund terpisah.
-- Ongkos kirim adalah **tarif flat** yang ditetapkan penjual, bukan kalkulasi ekspedisi otomatis. Default Rp0 sampai admin mengubahnya. Pengambilan sendiri Rp0.
-- **QRIS saat ini statis + verifikasi manual**. Gambar yang diunggah harus QRIS merchant resmi; ini **belum** payment gateway dengan webhook, status bank otomatis, virtual account, atau QRIS dinamis. Integrasi Midtrans/Xendit/DOKU dapat menjadi fase berikutnya.
+At checkout, requested quantities are deducted from available product stock inside the order transaction. Eligible cancellation and expiry flows restore the reserved quantity.
 
-## Catatan sebelum benar-benar online / produksi
+## Pricing model
 
-Aplikasi ini adalah **MVP fungsional, bukan sertifikasi siap produksi**. Uji dengan data dummy, transaksi kecil, dan pencatatan mutasi dahulu. Deploy dengan HTTPS + reverse proxy satu origin untuk frontend dan `/api` backend, set `NODE_ENV=production`, `COOKIE_SECURE=true`, `JWT_SECRET` unik, database user khusus dengan privilege minimum, backup database dan folder `backend/uploads`, akses admin terbatas, dan tambahkan verifikasi nomor/email serta prosedur refund sesuai kebutuhan. File `.env` dan upload tidak disertakan di ZIP.
+CemilIn supports packaged products and kilogram-based products.
 
-Pada mode development yang dijalankan lewat `Start-Windows.ps1` atau `npm run dev`, launcher otomatis mencari port kosong bagi website dan API, menghubungkan proxy, serta mengizinkan origin localhost/127.0.0.1 dan alamat IPv4 LAN komputer pada port website terpilih. Jika menggunakan domain kustom atau proxy lain, masukkan origin tambahan di `backend/.env` sebagai `FRONTEND_ORIGIN` (dipisahkan koma). Jangan gunakan wildcard origin untuk sesi login. Tidak perlu mengubah `.env` hanya karena port terpakai.
+The current promotion engine applies the configured tier **once to the eligible packaged-product portion of the cart**, rather than multiplying the discount by every item. KG items are kept outside that packaged-item promotion calculation.
 
-### Uji port otomatis
+Seed products and prices are demo/bootstrap data. Production preparation resets newly seeded stock to zero so actual stock can be entered from Seller Center.
 
-`npm run test:ports` menguji deteksi port terpakai dan pilihan port baru tanpa mematikan aplikasi lain. Jalankan `Start-Windows.ps1` untuk menampilkan URL terbaru setiap kali startup.
+## Accounting scope
 
-### Uji logika inti
+The backend currently exposes accounting flows for:
 
-`npm run test --prefix backend`
+- account master
+- supplier master
+- cash / bank / e-wallet master
+- purchase transactions
+- cash and bank transactions
+- opening balances
+- purchase journal
+- general ledger
+- profit & loss
+- balance sheet
+- cash flow
+- worksheet
 
-Meliputi hitung tier diskon 4/5/10 pcs, KG terpisah, ongkir, batas maksimum diskon, dan larangan persiapan barang sebelum verifikasi. Karena lingkungan pembuat ZIP ini tidak dapat mengunduh dependency dan tidak menyediakan server MySQL, pengujian integrasi browser ↔ API ↔ MySQL perlu dijalankan di komputer pengguna setelah langkah setup.
+Purchase costing supports invoice and line-level discount handling before inventory cost is applied.
+
+## Architecture
+
+~~~mermaid
+flowchart LR
+    C[Customer] --> WEB[React + TypeScript]
+    A[Seller / Admin] --> WEB
+
+    WEB -->|REST / Cookies| API[Express API]
+
+    API --> AUTH[Authentication]
+    API --> CART[Cart & Pricing]
+    API --> ORD[Orders & Payments]
+    API --> ADM[Seller Center API]
+    API --> ACC[Accounting & Purchasing]
+
+    AUTH --> DB[(MySQL)]
+    CART --> DB
+    ORD --> DB
+    ADM --> DB
+    ACC --> DB
+
+    API --> FILES[Product / QRIS / Payment Uploads]
+
+    RW[Railway Service] --> API
+    RW --> WEB
+    RW --> DB
+~~~
+
+Production serves the Vite build and API from one Express service, keeping frontend and backend on the same public origin.
+
+## Tech stack
+
+| Layer | Technology |
+| --- | --- |
+| Frontend | React 18, TypeScript |
+| Frontend build | Vite |
+| Backend | Node.js, Express |
+| Database | MySQL / mysql2 |
+| Authentication | JWT in HTTP-only cookie |
+| Password hashing | bcrypt |
+| Uploads | Multer |
+| Security middleware | Helmet, CORS, express-rate-limit |
+| Deployment | Railway |
+| Testing | Node test runner |
+
+## Repository structure
+
+~~~text
+Cemilin/
+├── frontend/                 # React + TypeScript storefront and Seller Center
+├── backend/
+│   ├── src/
+│   │   ├── routes/          # Public, auth, cart, orders, admin, accounting
+│   │   └── services/        # Orders, accounting, purchase costing, validation
+│   ├── scripts/             # Admin creation and additive DB migrations
+│   └── tests/               # Backend business-logic tests
+├── database/                # Base schema, seed data, additive migrations
+├── scripts/                 # Local development launcher and port tests
+├── railway.json             # Railway build/deploy configuration
+├── PRODUCTION-RAILWAY.md    # Production deployment notes
+└── README.md
+~~~
+
+## Local development
+
+### Requirements
+
+- Node.js 20+
+- npm
+- MySQL or compatible MariaDB
+
+Install all dependencies:
+
+~~~powershell
+npm run install:all
+~~~
+
+Copy the backend environment template:
+
+~~~powershell
+copy backend\.env.example backend\.env
+~~~
+
+Configure the local database and set a random `JWT_SECRET` of at least 32 characters.
+
+Import:
+
+~~~text
+database/001_schema.sql
+database/002_seed_products.sql
+~~~
+
+Start the application:
+
+~~~powershell
+npm run dev
+~~~
+
+The local launcher automatically selects available frontend/API ports and connects the Vite proxy to the chosen API port.
+
+## First admin
+
+Set these only in your local/production environment:
+
+~~~text
+ADMIN_EMAIL
+ADMIN_PASSWORD
+ADMIN_NAME
+~~~
+
+Then run:
+
+~~~powershell
+npm run admin --prefix backend
+~~~
+
+The admin password must be at least 12 characters. Remove `ADMIN_PASSWORD` from production service variables after the initial admin is created.
+
+## Testing
+
+Backend business logic:
+
+~~~powershell
+npm run test --prefix backend
+~~~
+
+Port-selection behavior:
+
+~~~powershell
+npm run test:ports
+~~~
+
+Current backend tests cover pricing, promo behavior, order status, account input/settings, purchase costing, cart notes/variants, username availability, and related business rules.
+
+## Railway deployment
+
+This repository contains `railway.json` for deployment.
+
+Production preparation:
+
+- creates the base schema when needed
+- seeds the product catalog only for an empty catalog
+- resets newly seeded production stock to zero
+- applies additive migrations
+- runs through the current accounting and purchase-costing migrations
+- exposes `/api/health` for Railway health checks
+
+See [PRODUCTION-RAILWAY.md](PRODUCTION-RAILWAY.md) for environment-variable and volume configuration.
+
+## Security & repository hygiene
+
+The repository keeps runtime secrets and customer uploads outside Git:
+
+- `**/.env` is ignored while `.env.example` remains tracked
+- `backend/uploads/` is ignored
+- `frontend/dist/` is ignored
+- patch backups and logs are ignored
+- the checked-in JWT value is a non-production placeholder
+- the server refuses to start with a missing, short, or `CHANGE_ME` JWT secret
+
+Production credentials belong in Railway service variables, not source control.
+
+See [SECURITY.md](SECURITY.md) for additional guidance.
+
+## Author
+
+**Febrian Tri Prasmanto**  
+Full-Stack Programmer
+
+- GitHub: [@Febriantrip](https://github.com/Febriantrip)
+- LinkedIn: [linkedin.com/in/febriantrip](https://www.linkedin.com/in/febriantrip)
+
+---
+
+<p align="center">
+  From snack catalog to transaction engine: storefront, operations, stock, payments, and accounting in one project.
+</p>
